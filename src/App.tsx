@@ -10,6 +10,9 @@ import ContactView from './components/ContactView';
 import LegalViews from './components/LegalViews';
 import ServiceAreasView from './components/ServiceAreasView';
 import WhyChooseUsView from './components/WhyChooseUsView';
+import BlogIndexView from './components/BlogIndexView';
+import BlogPostView from './components/BlogPostView';
+import { getPostBySlug } from './lib/blog';
 import { servicesData } from './data/servicesData';
 import { citiesData } from './data/citiesData';
 
@@ -177,6 +180,77 @@ export default function App() {
             'addressCountry': 'US'
           }
         };
+      }
+    } else if (currentPath === 'blog') {
+      title = 'Garage Door Maintenance & Repair Blog | DeKalb Garage Door Repair';
+      description = 'Read expert garage door repair guides, troubleshooting checklists, winter maintenance tips, and spring replacement articles from certified DeKalb IL technicians.';
+
+      schemaJson = {
+        '@context': 'https://schema.org',
+        '@type': 'Blog',
+        'name': 'DeKalb Garage Door Repair & Maintenance Blog',
+        'url': canonicalUrl,
+        'description': 'Expert troubleshooting guides, winter prep checklists, spring replacement advice, and local tips from certified DeKalb technicians.'
+      };
+    } else if (currentPath.startsWith('blog/')) {
+      const slug = currentPath.split('/')[1];
+      const post = getPostBySlug(slug);
+      if (post) {
+        title = `${post.title} | DeKalb Garage Door Repair`;
+        description = post.description;
+
+        schemaJson = [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            'headline': post.title,
+            'description': post.description,
+            'image': [post.featuredImage],
+            'datePublished': post.date,
+            'dateModified': post.updatedDate || post.date,
+            'author': {
+              '@type': 'Person',
+              'name': post.author
+            },
+            'publisher': {
+              '@type': 'Organization',
+              'name': 'DeKalb Garage Door Repair',
+              'logo': {
+                '@type': 'ImageObject',
+                'url': 'https://dekalbgaragedoorrepair.com/src/assets/images/garage_door_hero_1784628372796.jpg'
+              }
+            },
+            'mainEntityOfPage': {
+              '@type': 'WebPage',
+              '@id': canonicalUrl
+            },
+            'keywords': post.primaryKeyword
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              {
+                '@type': 'ListItem',
+                'position': 1,
+                'name': 'Home',
+                'item': `${baseDomain}/`
+              },
+              {
+                '@type': 'ListItem',
+                'position': 2,
+                'name': 'Blog',
+                'item': `${baseDomain}/blog`
+              },
+              {
+                '@type': 'ListItem',
+                'position': 3,
+                'name': post.title,
+                'item': canonicalUrl
+              }
+            ]
+          }
+        ];
       }
     } else {
       switch (currentPath) {
@@ -354,6 +428,19 @@ export default function App() {
     if (currentPath.startsWith('city/')) {
       const cityId = currentPath.split('/')[1];
       return <CityView cityId={cityId} onNavigate={handleNavigate} />;
+    }
+
+    if (currentPath === 'blog') {
+      return <BlogIndexView onNavigate={handleNavigate} />;
+    }
+
+    if (currentPath.startsWith('blog/')) {
+      const slug = currentPath.split('/')[1];
+      const post = getPostBySlug(slug);
+      if (post) {
+        return <BlogPostView post={post} onNavigate={handleNavigate} />;
+      }
+      return <BlogIndexView onNavigate={handleNavigate} />;
     }
 
     switch (currentPath) {

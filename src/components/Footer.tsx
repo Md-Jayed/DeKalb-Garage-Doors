@@ -106,6 +106,11 @@ export default function Footer({ onNavigate }: FooterProps) {
                 24/7 Emergency Repairs
               </button>
             </li>
+            <li className="pt-1 border-t border-slate-800">
+              <button onClick={() => handleLinkClick('blog')} className="hover:text-amber-500 transition-colors text-left text-blue-400 font-bold flex items-center gap-1">
+                Blog & Maintenance Guides &rarr;
+              </button>
+            </li>
           </ul>
         </div>
 
@@ -178,6 +183,10 @@ export default function Footer({ onNavigate }: FooterProps) {
             </p>
           </div>
           <div className="flex gap-4 text-slate-500">
+            <button onClick={() => handleLinkClick('blog')} className="hover:text-slate-300 transition-colors">
+              Blog
+            </button>
+            <span>|</span>
             <button onClick={() => handleLinkClick('privacy-policy')} className="hover:text-slate-300 transition-colors">
               Privacy Policy
             </button>
