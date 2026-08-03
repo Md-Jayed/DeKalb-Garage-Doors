@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dekalbgaragedoorrepair.com/sitemap.xml
+Sitemap: https://dekalbgaragerepair.com/sitemap.xml

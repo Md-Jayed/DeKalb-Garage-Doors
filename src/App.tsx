@@ -82,7 +82,7 @@ export default function App() {
     let description = 'Premium, fast-loading garage door repair, spring replacement, opener installation, and 24/7 emergency services in DeKalb, IL and surrounding Northern Illinois areas.';
     let schemaJson: any = null;
 
-    const baseDomain = 'https://dekalbgaragedoorrepair.com';
+    const baseDomain = 'https://dekalbgaragerepair.com';
     const canonicalUrl = `${baseDomain}/${currentPath === 'home' || currentPath === '' ? '' : currentPath}`;
 
     const serviceIds = [
@@ -117,7 +117,7 @@ export default function App() {
           'name': 'DeKalb Garage Door Repair',
           'telephone': '+18155558240',
           'priceRange': '$$',
-          'image': 'https://dekalbgaragedoorrepair.com/src/assets/images/garage_door_hero_1784628372796.jpg',
+          'image': 'https://dekalbgaragerepair.com/images/garage-door-repair.webp',
           'address': {
             '@type': 'PostalAddress',
             'streetAddress': '1100 Lincoln Hwy',
@@ -217,7 +217,7 @@ export default function App() {
               'name': 'DeKalb Garage Door Repair',
               'logo': {
                 '@type': 'ImageObject',
-                'url': 'https://dekalbgaragedoorrepair.com/src/assets/images/garage_door_hero_1784628372796.jpg'
+                'url': 'https://dekalbgaragerepair.com/images/garage-door-repair.webp'
               }
             },
             'mainEntityOfPage': {
